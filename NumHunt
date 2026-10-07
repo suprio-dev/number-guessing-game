@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <ctype.h>
+int main()
+{
+	int ul, ll, round = 0, mid;
+	char a;
+	printf("====================================\n");
+	printf("        Welcome to NumHunt! 🎯\n");
+	printf("====================================\n");
+	printf("I'll try to guess the number you're thinking of.\n");
+	printf("First, give me the range in which your number lies.\n\n");
+
+	printf("How to respond:\n");
+	printf("H → My guess is smaller than your number\n");
+	printf("L → My guess is larger than your number\n");
+	printf("Y → My guess is correct\n\n");
+
+	printf("Enter the lowest value of your range: ");
+	scanf("%d", &ll);
+
+	printf("Enter the highest value of your range: ");
+	scanf("%d", &ul);
+
+	if (ll > ul)
+	{
+		printf("Invalid range! The lowest value must be smaller than the highest value.\n");
+	}
+	else
+	{
+		while (1)
+		{
+			printf("\nCurrent Range: [%d - %d]\n", ll, ul);
+			mid = (ll + ul) / 2;
+
+			printf("My guess: %d\n", mid);
+			printf("Your response (H/L/Y): ");
+			scanf(" %c", &a);
+			printf("\n");
+			if (toupper(a) == 'H')
+			{
+				ll = mid + 1;
+
+				round += 1;
+			}
+			else if (toupper(a) == 'L')
+			{
+				ul = mid;
+
+				round += 1;
+			}
+			else if (toupper(a) == 'Y')
+			{
+				printf("🎯 Got it! Your number was %d.\n", mid);
+				printf("Thanks for playing NumHunt!\n");
+				printf("Total guesses: %d\n", round);
+				break;
+			}
+			else
+			{
+				printf("Invalid response! Please enter H, L, or Y.\n");
+			}
+		}
+	}
+	return 0;
+}
